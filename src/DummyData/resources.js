@@ -1,0 +1,110 @@
+import {
+  pink,
+  purple,
+  teal,
+  amber,
+  deepOrange,
+} from "@material-ui/core/colors";
+
+export const appointments = [
+  {
+    id: 0,
+    title: "Root Canal",
+    name: "John Smith",
+    day: "5",
+    month: "9",
+    year: "2021",
+    time: "9",
+  },
+  {
+    id: 1,
+    title: "Kidney Stone",
+    name: "Akram Smith",
+    day: "6",
+    month: "9",
+    year: "2021",
+    time: "10",
+  },
+  {
+    id: 2,
+    title: "Eye Check up",
+    name: "Sachin Smith",
+    day: "7",
+    month: "9",
+    year: "2021",
+    time: "12",
+  },
+  {
+    id: 3,
+    title: "Cancer",
+    name: "Heera Smith",
+    day: "8",
+    month: "9",
+    year: "2021",
+    time: "11",
+  },
+  {
+    id: 4,
+    title: "Bone Marrow",
+    name: "Karan Smith",
+    day: "9",
+    month: "9",
+    year: "2021",
+    time: "14",
+  },
+  {
+    id: 5,
+    title: "Fracture",
+    name: "Aakash Smith",
+    day: "10",
+    month: "9",
+    year: "2021",
+    time: "13",
+  },
+  {
+    id: 6,
+    title: "Monthly Checkup",
+    name: "Ram Smith",
+    day: "11",
+    month: "9",
+    year: "2021",
+    time: "9",
+  },
+  {
+    id: 7,
+    title: "Kidney",
+    name: "Karma Smith",
+    day: "12",
+    month: "9",
+    year: "2021",
+    time: "14",
+  },
+];
+
+export const resourcesData = [
+  {
+    text: "Room 101",
+    id: 1,
+    color: amber,
+  },
+  {
+    text: "Room 102",
+    id: 2,
+    color: pink,
+  },
+  {
+    text: "Room 103",
+    id: 3,
+    color: purple,
+  },
+  {
+    text: "Meeting room",
+    id: 4,
+    color: deepOrange,
+  },
+  {
+    text: "Conference hall",
+    id: 5,
+    color: teal,
+  },
+];
