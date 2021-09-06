@@ -40,11 +40,6 @@ const userReducer = (state = appointments, action) => {
         }
       });
       return [...stateTem];
-      // return {
-      //   ...state,
-      //   // loading: false,
-      //   // role: action.payload,
-      // };
     }
     case UPDATE_DRAG_DATA: {
       var stateTem = state;
@@ -69,27 +64,6 @@ const userReducer = (state = appointments, action) => {
       return [...stateTem];
     }
     case ADD_DATA: {
-      // console.log("Adding data", action.payload[0]);
-
-      // var stateTem = state;
-      // // state.map((data, index) => {
-      // //   if (
-      // //     data.day == action.payload[1].day &&
-      // //     data.time == action.payload[1].time &&
-      // //     data.month == action.payload[1].month &&
-      // //     data.year == action.payload[1].year
-      // //   ) {
-      // //     stateTem[index] = {
-      // //       id: data.id,
-      // //       firstName: data.firstName,
-      // //       lastName: data.lastName,
-      // //       day: action.payload[0].day,
-      // //       month: action.payload[0].month,
-      // //       year: action.payload[0].year,
-      // //       time: action.payload[0].time,
-      // //     };
-      // //   }
-      // // });
       return [...state, action.payload[0]];
     }
     default:
