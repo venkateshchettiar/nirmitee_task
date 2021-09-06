@@ -89,10 +89,10 @@ const EditModal = (props) => {
     dispatch(addData(userData));
   };
 
-  useEffect(() => {
-    console.log("1", firstName);
-    console.log("2", lastName);
-  }, [firstName, lastName]);
+  // useEffect(() => {
+  //   console.log("1", firstName);
+  //   console.log("2", lastName);
+  // }, [firstName, lastName]);
   const len = Object.keys(data).length;
 
   return (
@@ -103,7 +103,6 @@ const EditModal = (props) => {
       centered
     >
       <form>
-        {console.log(data)}
         {len !== 0 ? (
           <>
             <div className="col m-2">
@@ -126,37 +125,6 @@ const EditModal = (props) => {
                     value={lastName}
                   />
                 </div>
-                {/* <div className="row mt-4 mb-5">
-              <div className="col">
-                <TextField
-                  id="date"
-                  label="Select Date"
-                  type="date"
-                  defaultValue="2017-05-24"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => handleDate(e.target.value)}
-                />
-              </div>
-              <div className="col">
-                <TextField
-                  id="time"
-                  label="Select Time"
-                  type="time"
-                  defaultValue="07:30"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => handleTime(e.target.value)}
-                  inputProps={{
-                    step: 300, // 5 min
-                  }}
-                />
-              </div>
-            </div> */}
               </div>
             </div>
             <Modal.Footer>

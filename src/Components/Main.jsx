@@ -11,19 +11,30 @@ import { updateDrag } from "../Redux/Action/userAction";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin: "20px",
+    margin: "0px 100px",
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    height: "115px",
+    height: "112px",
+    backgroundColor: "#F7DC80",
+  },
+  blanks: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    height: "112px",
+    backgroundColor: "#fff",
   },
   mon: {
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
     height: "55px",
+    backgroundColor: "#64bcec",
+    color: "#fff",
+    fontWeight: "bold",
   },
   icon: {
     padding: theme.spacing(2),
@@ -31,13 +42,19 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     width: "70px",
     height: "auto",
+    backgroundColor: "grey",
+    color: "#fff",
+    fontWeight: "bold",
   },
   time: {
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
     width: "70px",
-    height: "115px",
+    height: "112px",
+    backgroundColor: "#64bcec",
+    color: "#fff",
+    fontWeight: "bold",
   },
 }));
 
@@ -73,12 +90,6 @@ const onDrop = (e, time, users, index, dispatch) => {
     },
   ];
   dispatch(updateDrag(userData));
-  // let task = users.filter((user) => {
-  //   if (user.name == name) {
-  //     user.name = name;
-  //   }
-  //   return task;
-  // });
 };
 
 const listData = (
@@ -120,7 +131,7 @@ const listData = (
         onDrop(e, time, data, index, dispatch);
       }}
     >
-      <Paper className={classes.paper}>
+      <Paper className={temCard ? classes.paper : classes.blanks}>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           {temCard ? (
             <EditIcon
@@ -129,18 +140,28 @@ const listData = (
                 handleEdit(userListTemData);
                 setId(userListTemData);
               }}
+              style={{ fontSize: "15px", cursor: "pointer" }}
             />
           ) : null}
         </div>
         {temCard ? (
-          `${userListTemData.firstName} ${userListTemData.lastName}`
+          <>
+            <h4>{`${userListTemData.firstName} ${userListTemData.lastName}`}</h4>
+            {/* <h6>{`${userListTemData.title}`}</h6> */}
+          </>
         ) : (
           <button
             onClick={() => {
               setModalShow(true);
               setId(userListTemData);
             }}
-            style={{ marginTop: "30px" }}
+            style={{
+              marginTop: "15px",
+              border: "none",
+              outline: "none",
+              backgroundColor: "transparent",
+              fontSize: "40px",
+            }}
           >
             +
           </button>

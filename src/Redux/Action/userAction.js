@@ -27,22 +27,8 @@ export const updateDrag = (data) => {
   };
 };
 export const addData = (data) => {
-  console.log(data);
   return {
     type: ADD_DATA,
     payload: data,
   };
 };
-
-// export const getUpdateData = (data) => {
-//   return async (dispatch) => {
-//     // var a = appointments.map((user, i) => {
-//     //   console.log(user.id == data[0].id);
-//     //   if (user.id == data[0].id) {
-//     //     var updateData = { data };
-//     //     return updateData;
-//     //   }
-//     // });
-//     dispatch(updateUser(data));
-//   };
-// };

@@ -139,8 +139,8 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(1),
       width: "auto",
     },
-    border: "1px solid blue",
-    color: "blue",
+    border: "1px solid #64bcec",
+    color: "#64bcec",
     borderRadius: "25px",
     marginRight: "25px",
   },
@@ -170,7 +170,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   add: {
-    color: "blue",
+    color: "#64bcec",
     borderRadius: "50%",
     fontSize: "40px",
     marginRight: "25px",
@@ -252,7 +252,7 @@ const Dashboard = () => {
               </ListItem>
               <ListItem
                 className={classes.list}
-                style={{ color: "blue" }}
+                style={{ color: "#64bcec" }}
                 // onClick={() => console.log("week")}
               >
                 Weekly
@@ -316,7 +316,7 @@ const Dashboard = () => {
                 height: calender ? "auto" : 78,
                 overflow: "hidden",
                 position: "absolute",
-                border: "1px solid black",
+                marginLeft: 600,
               }}
             >
               <div
@@ -363,21 +363,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-// {/* <Container maxWidth="lg" className={classes.container}>
-//           <Grid container spacing={3}>
-//             {/* Chart */}
-//             <Grid item xs={12} md={8} lg={9}>
-//               <Paper className={fixedHeightPaper}>{/* <Chart /> */}</Paper>
-//             </Grid>
-//             {/* Recent Deposits */}
-//             <Grid item xs={12} md={4} lg={3}>
-//               <Paper className={fixedHeightPaper}>{/* <Deposits /> */}</Paper>
-//             </Grid>
-//             {/* Recent Orders */}
-//             <Grid item xs={12}>
-//               <Paper className={classes.paper}>{/* <Orders /> */}</Paper>
-//             </Grid>
-//           </Grid>
-//           <Box pt={4}>{/* <Copyright /> */}</Box>
-//         </Container> */}

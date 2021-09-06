@@ -29,7 +29,7 @@ const MainListItems = () => {
       </ListItem>
       <ListItem
         button
-        style={{ backgroundColor: "blue", color: "#fff" }}
+        style={{ backgroundColor: "#64bcec", color: "#fff" }}
         className={classes.root}
       >
         <ListItemIcon>
@@ -66,29 +66,3 @@ const MainListItems = () => {
 };
 
 export default MainListItems;
-
-// const SecondaryListItems = (
-//   <div>
-//     <ListSubheader inset>Saved reports</ListSubheader>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Current month" />
-//     </ListItem>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Last quarter" />
-//     </ListItem>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Year-end sale" />
-//     </ListItem>
-//   </div>
-// );
-
-// export default SecondaryListItems;

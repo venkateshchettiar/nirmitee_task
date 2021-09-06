@@ -40,11 +40,6 @@ const userReducer = (state = appointments, action) => {
         }
       });
       return [...stateTem];
-      // return {
-      //   ...state,
-      //   // loading: false,
-      //   // role: action.payload,
-      // };
     }
     case UPDATE_DRAG_DATA: {
       var stateTem = state;
