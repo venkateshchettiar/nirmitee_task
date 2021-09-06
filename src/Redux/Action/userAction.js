@@ -4,7 +4,6 @@ import {
   UPDATE_DRAG_DATA,
   USER_DATA,
 } from "./../../DummyData/constants";
-import { appointments } from "../../DummyData/resources";
 
 export const userRole = (data) => {
   return {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -16,21 +16,18 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary,
     height: "112px",
     backgroundColor: "#F7DC80",
   },
   blanks: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary,
     height: "112px",
     backgroundColor: "#fff",
   },
   mon: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary,
     height: "55px",
     backgroundColor: "#64bcec",
     color: "#fff",
@@ -57,10 +54,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
 }));
-
-const handleEdit = (user) => {
-  // console.log(user);
-};
 
 const onDragStart = (e, user) => {
   e.dataTransfer.setData("day", user.day);
@@ -137,7 +130,6 @@ const listData = (
             <EditIcon
               onClick={() => {
                 setModalShow(true);
-                handleEdit(userListTemData);
                 setId(userListTemData);
               }}
               style={{ fontSize: "15px", cursor: "pointer" }}
@@ -147,7 +139,6 @@ const listData = (
         {temCard ? (
           <>
             <h4>{`${userListTemData.firstName} ${userListTemData.lastName}`}</h4>
-            {/* <h6>{`${userListTemData.title}`}</h6> */}
           </>
         ) : (
           <button

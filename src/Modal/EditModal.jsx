@@ -48,8 +48,6 @@ const EditModal = (props) => {
       },
     ];
     dispatch(updateUser(userData));
-    cogoToast.success("Appointment Updated");
-    props.onHide();
     setFirstName("");
     setLastName("");
   };
@@ -128,6 +126,7 @@ const EditModal = (props) => {
               <Button
                 onClick={() => {
                   handleUpdate();
+                  props.onHide();
                 }}
               >
                 Update
