@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@material-ui/icons/Edit";
-
 import EditModal from "./../Modal/EditModal";
 import { updateDrag } from "../Redux/Action/userAction";
 
@@ -94,30 +93,6 @@ const listData = (
 ) => {
   var temCard = false;
   var userListTemData = {};
-  // (
-  //   <Grid
-  //     item
-  //     xs={2}
-  //     key={index}
-  //     onDragOver={(e) => {
-  //       e.preventDefault();
-  //     }}
-  // onDrop={(e) => {
-  //   onDrop(e, time, data, index, dispatch);
-  // }}
-  //   >
-  //     <Paper className={classes.paper}>
-  //       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-  //         <EditIcon
-  //           onClick={() => {
-  //             setModalShow(true);
-  //           }}
-  //         />
-  //         <h1>{index}</h1>
-  //       </div>
-  //     </Paper>
-  //   </Grid>
-  // );
 
   users.map((user, i) => {
     if (
@@ -165,6 +140,7 @@ const listData = (
               setModalShow(true);
               setId(userListTemData);
             }}
+            style={{ marginTop: "30px" }}
           >
             +
           </button>
@@ -242,16 +218,6 @@ const Main = (props) => {
                   dispatch
                 );
               })}
-              {/* {users.map((user, i) => {
-                console.log(user.day);
-                if (user.day == selectedDay.day + index) {
-                  return (
-                    <Grid item xs={2}>
-                      <Paper className={classes.paper}>{user.name}</Paper>
-                    </Grid>
-                  );
-                }
-              })} */}
             </Grid>
           );
         })}
