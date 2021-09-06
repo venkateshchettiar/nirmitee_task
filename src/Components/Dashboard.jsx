@@ -5,6 +5,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
+import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
@@ -12,6 +13,10 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+// import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuOpenIcon from "@material-ui/icons/MenuOpen";
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -19,8 +24,26 @@ import MainListItems from "./ListItems";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar } from "react-modern-calendar-datepicker";
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
+
 import Main from "./Main";
+
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {"Copyright © "}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Your Website
+//       </Link>{" "}
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 const drawerWidth = 240;
 
@@ -107,6 +130,7 @@ const useStyles = makeStyles((theme) => ({
   },
   search: {
     position: "relative",
+    borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -181,6 +205,7 @@ const Dashboard = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -215,9 +240,23 @@ const Dashboard = () => {
             </div>
 
             <div className={classes.listing}>
-              <ListItem className={classes.list}>List</ListItem>
-              <ListItem className={classes.list}>Monthly</ListItem>
-              <ListItem className={classes.list} style={{ color: "#64bcec" }}>
+              <ListItem
+                className={classes.list}
+                // onClick={() => console.log("list")}
+              >
+                List
+              </ListItem>
+              <ListItem
+                className={classes.list}
+                // onClick={() => console.log("month")}
+              >
+                Monthly
+              </ListItem>
+              <ListItem
+                className={classes.list}
+                style={{ color: "#64bcec" }}
+                // onClick={() => console.log("week")}
+              >
                 Weekly
               </ListItem>
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -16,18 +16,21 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
+    color: theme.palette.text.secondary,
     height: "112px",
     backgroundColor: "#F7DC80",
   },
   blanks: {
     padding: theme.spacing(2),
     textAlign: "center",
+    color: theme.palette.text.secondary,
     height: "112px",
     backgroundColor: "#fff",
   },
   mon: {
     padding: theme.spacing(2),
     textAlign: "center",
+    color: theme.palette.text.secondary,
     height: "55px",
     backgroundColor: "#64bcec",
     color: "#fff",
@@ -36,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     padding: theme.spacing(2),
     textAlign: "center",
+    color: theme.palette.text.secondary,
     width: "70px",
     height: "auto",
     backgroundColor: "grey",
@@ -45,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   time: {
     padding: theme.spacing(2),
     textAlign: "center",
+    color: theme.palette.text.secondary,
     width: "70px",
     height: "112px",
     backgroundColor: "#64bcec",
@@ -52,6 +57,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
 }));
+
+const handleEdit = (user) => {
+  // console.log(user);
+};
 
 const onDragStart = (e, user) => {
   e.dataTransfer.setData("day", user.day);
@@ -98,10 +107,10 @@ const listData = (
 
   users.map((user, i) => {
     if (
-      user.day === data.day + index &&
-      user.time === time &&
-      user.month === data.month &&
-      user.year === data.year
+      user.day == data.day + index &&
+      user.time == time &&
+      user.month == data.month &&
+      user.year == data.year
     ) {
       temCard = true;
       userListTemData = user;
@@ -128,6 +137,7 @@ const listData = (
             <EditIcon
               onClick={() => {
                 setModalShow(true);
+                handleEdit(userListTemData);
                 setId(userListTemData);
               }}
               style={{ fontSize: "15px", cursor: "pointer" }}
@@ -137,6 +147,7 @@ const listData = (
         {temCard ? (
           <>
             <h4>{`${userListTemData.firstName} ${userListTemData.lastName}`}</h4>
+            {/* <h6>{`${userListTemData.title}`}</h6> */}
           </>
         ) : (
           <button
