@@ -118,6 +118,7 @@ const listData = (
   //     </Paper>
   //   </Grid>
   // );
+
   users.map((user, i) => {
     if (
       user.day == data.day + index &&
@@ -146,18 +147,28 @@ const listData = (
     >
       <Paper className={classes.paper}>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <EditIcon
-            onClick={() => {
-              handleEdit(userListTemData);
-              setId(userListTemData);
-              setModalShow(true);
-            }}
-          />
+          {temCard ? (
+            <EditIcon
+              onClick={() => {
+                setModalShow(true);
+                handleEdit(userListTemData);
+                setId(userListTemData);
+              }}
+            />
+          ) : null}
         </div>
-        {temCard
-          ? `${userListTemData.firstName} ${userListTemData.lastName}`
-          : null}
-        {/* <h1>{index}</h1> */}
+        {temCard ? (
+          `${userListTemData.firstName} ${userListTemData.lastName}`
+        ) : (
+          <button
+            onClick={() => {
+              setModalShow(true);
+              setId(userListTemData);
+            }}
+          >
+            +
+          </button>
+        )}
       </Paper>
     </Grid>
   );
@@ -188,9 +199,9 @@ const Main = (props) => {
     "December",
   ];
 
-  useEffect(() => {
-    console.log("timing", weekDays);
-  }, [weekDays]);
+  // useEffect(() => {
+  //   console.log("timing", weekDays);
+  // }, [weekDays]);
 
   return (
     <div className={classes.root}>
