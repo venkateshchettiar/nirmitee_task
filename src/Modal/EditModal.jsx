@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { getUpdateData, updateUser } from "../Redux/Action/userAction";
+import { addData, getUpdateData, updateUser } from "../Redux/Action/userAction";
 import { Calendar } from "react-modern-calendar-datepicker";
 
 import "date-fns";
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const EditModal = (props) => {
-  const { data } = props;
+  const { data, length } = props;
   const classes = useStyles();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -62,18 +62,39 @@ const EditModal = (props) => {
     setLastName("");
   };
 
-  // const handleDate = (data) => {
-  //   const newDate = data.split("-");
-  //   console.log("date", newDate);
-  //   setDate(newDate[0]);
-  //   setMonth(newDate[1]);
-  //   setYear(newDate[2]);
-  // };
+  const handleDate = (data) => {
+    const newDate = data.split("-");
+    setYear(newDate[0]);
+    setMonth(newDate[1]);
+    setDate(newDate[2]);
+  };
 
-  // const handleTime = (data) => {
-  //   const newTime = data.split(":");
-  //   setTime(newTime[0]);
-  // };
+  const handleTime = (data) => {
+    const newTime = data.split(":");
+    setTime(newTime[0]);
+  };
+  const handleAdd = () => {
+    const userData = [
+      {
+        id: length + 1,
+        firstName: firstName,
+        lastName: lastName,
+        day: date,
+        month: month,
+        year: year,
+        time: time,
+      },
+    ];
+
+    dispatch(addData(userData));
+  };
+
+  useEffect(() => {
+    console.log("1", firstName);
+    console.log("2", lastName);
+  }, [firstName, lastName]);
+  const len = Object.keys(data).length;
+
   return (
     <Modal
       {...props}
@@ -82,7 +103,8 @@ const EditModal = (props) => {
       centered
     >
       <form>
-        {data ? (
+        {console.log(data)}
+        {len !== 0 ? (
           <>
             <div className="col m-2">
               <div className="row mt-4 mb-5">
@@ -179,47 +201,47 @@ const EditModal = (props) => {
                     value={lastName}
                   />
                 </div>
-                {/* <div className="row mt-4 mb-5">
-              <div className="col">
-                <TextField
-                  id="date"
-                  label="Select Date"
-                  type="date"
-                  defaultValue="2017-05-24"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => handleDate(e.target.value)}
-                />
-              </div>
-              <div className="col">
-                <TextField
-                  id="time"
-                  label="Select Time"
-                  type="time"
-                  defaultValue="07:30"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => handleTime(e.target.value)}
-                  inputProps={{
-                    step: 300, // 5 min
-                  }}
-                />
-              </div>
-            </div> */}
+                <div className="row mt-4 mb-5">
+                  <div className="col">
+                    <TextField
+                      id="date"
+                      label="Select Date"
+                      type="date"
+                      // defaultValue="2017-05-24"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={(e) => handleDate(e.target.value)}
+                    />
+                  </div>
+                  <div className="col">
+                    <TextField
+                      id="time"
+                      label="Select Time"
+                      type="time"
+                      // defaultValue="07:30"
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={(e) => handleTime(e.target.value)}
+                      inputProps={{
+                        step: 300, // 5 min
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <Modal.Footer>
               <Button
                 onClick={() => {
-                  // handleUpdate();
+                  handleAdd();
                   props.onHide();
                 }}
               >
-                Update
+                Add
               </Button>
               <Button
                 onClick={() => {

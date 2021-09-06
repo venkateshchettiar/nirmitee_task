@@ -2,6 +2,7 @@ import {
   UPDATE_DATA,
   USER_DATA,
   UPDATE_DRAG_DATA,
+  ADD_DATA,
 } from "./../../DummyData/constants";
 import { appointments } from "../../DummyData/resources";
 
@@ -65,8 +66,10 @@ const userReducer = (state = appointments, action) => {
           };
         }
       });
-      console.log([...stateTem]);
       return [...stateTem];
+    }
+    case ADD_DATA: {
+      return [...state, action.payload[0]];
     }
     default:
       return state;

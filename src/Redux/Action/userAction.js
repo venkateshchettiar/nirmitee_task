@@ -1,4 +1,5 @@
 import {
+  ADD_DATA,
   UPDATE_DATA,
   UPDATE_DRAG_DATA,
   USER_DATA,
@@ -20,9 +21,15 @@ export const updateUser = (data) => {
 };
 
 export const updateDrag = (data) => {
-  console.log(data);
   return {
     type: UPDATE_DRAG_DATA,
+    payload: data,
+  };
+};
+export const addData = (data) => {
+  console.log(data);
+  return {
+    type: ADD_DATA,
     payload: data,
   };
 };

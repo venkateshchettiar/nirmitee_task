@@ -227,6 +227,7 @@ const Main = (props) => {
           show={modalShow}
           onHide={() => setModalShow(false)}
           data={id}
+          length={users.length}
         />
       </div>
     </div>
