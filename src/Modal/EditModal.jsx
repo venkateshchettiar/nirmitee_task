@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addData, getUpdateData, updateUser } from "../Redux/Action/userAction";
-import { Calendar } from "react-modern-calendar-datepicker";
-
-import "date-fns";
-// import Grid from "@material-ui/core/Grid";
-// import DateFnsUtils from "@date-io/date-fns";
-// import {
-//   MuiPickersUtilsProvider,
-//   KeyboardTimePicker,
-//   KeyboardDatePicker,
-// } from "@material-ui/pickers";
+import { addData, updateUser } from "../Redux/Action/userAction";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { userRole } from "./../Redux/Action/userAction";
+import cogoToast from "cogo-toast";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -58,6 +48,8 @@ const EditModal = (props) => {
       },
     ];
     dispatch(updateUser(userData));
+    cogoToast.success("Appointment Updated");
+    props.onHide();
     setFirstName("");
     setLastName("");
   };
@@ -74,19 +66,24 @@ const EditModal = (props) => {
     setTime(newTime[0]);
   };
   const handleAdd = () => {
-    const userData = [
-      {
-        id: length + 1,
-        firstName: firstName,
-        lastName: lastName,
-        day: date,
-        month: month,
-        year: year,
-        time: time,
-      },
-    ];
-
-    dispatch(addData(userData));
+    if (firstName && lastName && date && month && year && time !== "") {
+      const userData = [
+        {
+          id: length + 1,
+          firstName: firstName,
+          lastName: lastName,
+          day: date,
+          month: month,
+          year: year,
+          time: time,
+        },
+      ];
+      dispatch(addData(userData));
+      props.onHide();
+      cogoToast.success("Appointment added");
+    } else {
+      cogoToast.error("please fill the data");
+    }
   };
 
   // useEffect(() => {
@@ -131,7 +128,6 @@ const EditModal = (props) => {
               <Button
                 onClick={() => {
                   handleUpdate();
-                  props.onHide();
                 }}
               >
                 Update
@@ -158,6 +154,7 @@ const EditModal = (props) => {
                     className="form-control"
                     onChange={(e) => setFirstName(e.target.value)}
                     value={firstName}
+                    required
                   />
                 </div>
                 <div className="col">
@@ -167,6 +164,7 @@ const EditModal = (props) => {
                     className="form-control"
                     onChange={(e) => setLastName(e.target.value)}
                     value={lastName}
+                    required
                   />
                 </div>
                 <div className="row mt-4 mb-5">
@@ -181,6 +179,7 @@ const EditModal = (props) => {
                         shrink: true,
                       }}
                       onChange={(e) => handleDate(e.target.value)}
+                      required
                     />
                   </div>
                   <div className="col">
@@ -197,6 +196,7 @@ const EditModal = (props) => {
                       inputProps={{
                         step: 300, // 5 min
                       }}
+                      required
                     />
                   </div>
                 </div>
@@ -206,7 +206,6 @@ const EditModal = (props) => {
               <Button
                 onClick={() => {
                   handleAdd();
-                  props.onHide();
                 }}
               >
                 Add
