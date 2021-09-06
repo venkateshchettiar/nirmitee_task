@@ -27,7 +27,7 @@ const userReducer = (state = appointments, action) => {
       // console.log("object: ", action.payload);
       state.map((data, index) => {
         // console.log("Data:, ", data.id);
-        if (data.id == action.payload[0].id) {
+        if (data.id === action.payload[0].id) {
           stateTem[index] = {
             id: data.id,
             firstName: action.payload[0].firstName,
@@ -42,15 +42,15 @@ const userReducer = (state = appointments, action) => {
       return [...stateTem];
     }
     case UPDATE_DRAG_DATA: {
-      var stateTem = state;
+      var stateTemp = state;
       state.map((data, index) => {
         if (
-          data.day == action.payload[1].day &&
-          data.time == action.payload[1].time &&
-          data.month == action.payload[1].month &&
-          data.year == action.payload[1].year
+          data.day === action.payload[1].day &&
+          data.time === action.payload[1].time &&
+          data.month === action.payload[1].month &&
+          data.year === action.payload[1].year
         ) {
-          stateTem[index] = {
+          stateTemp[index] = {
             id: data.id,
             firstName: data.firstName,
             lastName: data.lastName,
@@ -61,7 +61,7 @@ const userReducer = (state = appointments, action) => {
           };
         }
       });
-      return [...stateTem];
+      return [...stateTemp];
     }
     case ADD_DATA: {
       return [...state, action.payload[0]];
