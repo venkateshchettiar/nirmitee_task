@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import { useDispatch, useSelector } from "react-redux";
-// import { userRole } from "./../Redux/Action/userAction";
+import EditIcon from "@material-ui/icons/Edit";
+
+import EditModal from "./../Modal/EditModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +21,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const listData = (users, data, index, classes, time) => {
+const handleEdit = (user) => {
+  // console.log(user);
+};
+
+const listData = (users, data, index, classes, time, setModalShow, setId) => {
   var temCard = (
     <Grid item xs={2} key={index}>
-      <Paper className={classes.paper}></Paper>
+      <Paper className={classes.paper}>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <EditIcon
+            onClick={() => {
+              setModalShow(true);
+            }}
+          />
+        </div>
+      </Paper>
     </Grid>
   );
   users.map((user, i) => {
@@ -34,7 +48,18 @@ const listData = (users, data, index, classes, time) => {
     ) {
       temCard = (
         <Grid item xs={2} key={i}>
-          <Paper className={classes.paper}>{user.name}</Paper>
+          <Paper className={classes.paper}>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <EditIcon
+                onClick={() => {
+                  handleEdit(user);
+                  setId(user);
+                  setModalShow(true);
+                }}
+              />
+            </div>
+            {`${user.firstName} ${user.lastName}`}
+          </Paper>
         </Grid>
       );
     }
@@ -47,8 +72,9 @@ const Main = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const users = useSelector((state) => state.userData);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [id, setId] = React.useState("");
 
-  const days = new Array(5).fill(1);
   const timing = new Array(6).fill(1);
   const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
   const months = [
@@ -65,6 +91,11 @@ const Main = (props) => {
     "November",
     "December",
   ];
+
+  useEffect(() => {
+    console.log("users", users);
+  }, [users]);
+
   return (
     <div className={classes.root}>
       <Grid container spacing={1} direction="column">
@@ -92,9 +123,18 @@ const Main = (props) => {
                   10 + index
                 }`}</Paper>
               </Grid>
-              {weekDays.map((data, i) => {
-                return listData(users, selectedDay, i, classes, 9 + index);
-              })}
+              {users &&
+                weekDays.map((data, i) => {
+                  return listData(
+                    users,
+                    selectedDay,
+                    i,
+                    classes,
+                    9 + index,
+                    setModalShow,
+                    setId
+                  );
+                })}
               {/* {users.map((user, i) => {
                 console.log(user.day);
                 if (user.day == selectedDay.day + index) {
@@ -109,6 +149,13 @@ const Main = (props) => {
           );
         })}
       </Grid>
+      <div>
+        <EditModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          data={id}
+        />
+      </div>
     </div>
   );
 };

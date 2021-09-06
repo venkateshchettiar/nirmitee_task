@@ -1,4 +1,5 @@
-import { USER_DATA } from "./../../DummyData/constants";
+import { UPDATE_DATA, USER_DATA } from "./../../DummyData/constants";
+import { appointments } from "../../DummyData/resources";
 
 export const userRole = (data) => {
   return {
@@ -6,3 +7,24 @@ export const userRole = (data) => {
     payload: data,
   };
 };
+
+export const updateUser = (data) => {
+  console.log(data);
+  return {
+    type: UPDATE_DATA,
+    payload: data,
+  };
+};
+
+// export const getUpdateData = (data) => {
+//   return async (dispatch) => {
+//     // var a = appointments.map((user, i) => {
+//     //   console.log(user.id == data[0].id);
+//     //   if (user.id == data[0].id) {
+//     //     var updateData = { data };
+//     //     return updateData;
+//     //   }
+//     // });
+//     dispatch(updateUser(data));
+//   };
+// };
