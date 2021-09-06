@@ -58,9 +58,6 @@ const EditModal = (props) => {
       },
     ];
     dispatch(updateUser(userData));
-    setTimeout(() => {
-      userRole();
-    }, 2000);
   };
 
   // const handleDate = (data) => {

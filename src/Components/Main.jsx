@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@material-ui/icons/Edit";
 
 import EditModal from "./../Modal/EditModal";
+import { updateDrag } from "../Redux/Action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,26 +20,104 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     height: "115px",
   },
+  mon: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    height: "55px",
+  },
+  icon: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    width: "70px",
+    height: "auto",
+  },
+  time: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    width: "70px",
+    height: "115px",
+  },
 }));
 
 const handleEdit = (user) => {
   // console.log(user);
 };
 
-const listData = (users, data, index, classes, time, setModalShow, setId) => {
-  var temCard = (
-    <Grid item xs={2} key={index}>
-      <Paper className={classes.paper}>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <EditIcon
-            onClick={() => {
-              setModalShow(true);
-            }}
-          />
-        </div>
-      </Paper>
-    </Grid>
-  );
+const onDragStart = (e, user) => {
+  e.dataTransfer.setData("day", user.day);
+  e.dataTransfer.setData("month", user.month);
+  e.dataTransfer.setData("year", user.year);
+  e.dataTransfer.setData("time", user.time);
+};
+
+const onDrop = (e, time, users, index, dispatch) => {
+  let day = e.dataTransfer.getData("day");
+  let month = e.dataTransfer.getData("month");
+  let year = e.dataTransfer.getData("year");
+  let times = e.dataTransfer.getData("time");
+
+  const userData = [
+    {
+      day: users.day + index,
+      month: users.month,
+      year: users.year,
+      time: time,
+    },
+    {
+      day: day,
+      month: month,
+      year: year,
+      time: times,
+    },
+  ];
+  dispatch(updateDrag(userData));
+  // let task = users.filter((user) => {
+  //   if (user.name == name) {
+  //     user.name = name;
+  //   }
+  //   return task;
+  // });
+};
+
+const listData = (
+  users,
+  data,
+  index,
+  classes,
+  time,
+  setModalShow,
+  setId,
+  dispatch
+) => {
+  var temCard = false;
+  var userListTemData = {};
+  // (
+  //   <Grid
+  //     item
+  //     xs={2}
+  //     key={index}
+  //     onDragOver={(e) => {
+  //       e.preventDefault();
+  //     }}
+  // onDrop={(e) => {
+  //   onDrop(e, time, data, index, dispatch);
+  // }}
+  //   >
+  //     <Paper className={classes.paper}>
+  //       <div style={{ display: "flex", justifyContent: "flex-end" }}>
+  //         <EditIcon
+  //           onClick={() => {
+  //             setModalShow(true);
+  //           }}
+  //         />
+  //         <h1>{index}</h1>
+  //       </div>
+  //     </Paper>
+  //   </Grid>
+  // );
   users.map((user, i) => {
     if (
       user.day == data.day + index &&
@@ -46,25 +125,42 @@ const listData = (users, data, index, classes, time, setModalShow, setId) => {
       user.month == data.month &&
       user.year == data.year
     ) {
-      temCard = (
-        <Grid item xs={2} key={i}>
-          <Paper className={classes.paper}>
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <EditIcon
-                onClick={() => {
-                  handleEdit(user);
-                  setId(user);
-                  setModalShow(true);
-                }}
-              />
-            </div>
-            {`${user.firstName} ${user.lastName}`}
-          </Paper>
-        </Grid>
-      );
+      temCard = true;
+      userListTemData = user;
     }
   });
-  return temCard;
+  return (
+    <Grid
+      item
+      xs={2}
+      draggable
+      onDragStart={(e) => {
+        if (temCard) onDragStart(e, userListTemData);
+      }}
+      onDragOver={(e) => {
+        e.preventDefault();
+      }}
+      onDrop={(e) => {
+        onDrop(e, time, data, index, dispatch);
+      }}
+    >
+      <Paper className={classes.paper}>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <EditIcon
+            onClick={() => {
+              handleEdit(userListTemData);
+              setId(userListTemData);
+              setModalShow(true);
+            }}
+          />
+        </div>
+        {temCard
+          ? `${userListTemData.firstName} ${userListTemData.lastName}`
+          : null}
+        <h1>{index}</h1>
+      </Paper>
+    </Grid>
+  );
 };
 
 const Main = (props) => {
@@ -93,22 +189,22 @@ const Main = (props) => {
   ];
 
   useEffect(() => {
-    console.log("users", users);
-  }, [users]);
+    console.log("timing", weekDays);
+  }, [weekDays]);
 
   return (
     <div className={classes.root}>
       <Grid container spacing={1} direction="column">
         <Grid item container spacing={1}>
-          <Grid item xs={2}>
-            <Paper className={classes.paper}>
+          <Grid item xs={0}>
+            <Paper className={classes.icon}>
               <AccessTimeIcon />
             </Paper>
           </Grid>
           {weekDays.map((data, i) => {
             return (
               <Grid item xs={2} key={i}>
-                <Paper className={classes.paper}>{`${selectedDay.day + i} ${
+                <Paper className={classes.mon}>{`${selectedDay.day + i} ${
                   months[selectedDay.month - 1]
                 } ${selectedDay.year}`}</Paper>
               </Grid>
@@ -118,23 +214,23 @@ const Main = (props) => {
         {timing.map((time, index) => {
           return (
             <Grid item container spacing={1} key={index}>
-              <Grid item xs={2}>
-                <Paper className={classes.paper}>{`${9 + index}-${
+              <Grid item xs={0}>
+                <Paper className={classes.time}>{`${9 + index}-${
                   10 + index
                 }`}</Paper>
               </Grid>
-              {users &&
-                weekDays.map((data, i) => {
-                  return listData(
-                    users,
-                    selectedDay,
-                    i,
-                    classes,
-                    9 + index,
-                    setModalShow,
-                    setId
-                  );
-                })}
+              {weekDays.map((data, i) => {
+                return listData(
+                  users,
+                  selectedDay,
+                  i,
+                  classes,
+                  9 + index,
+                  setModalShow,
+                  setId,
+                  dispatch
+                );
+              })}
               {/* {users.map((user, i) => {
                 console.log(user.day);
                 if (user.day == selectedDay.day + index) {

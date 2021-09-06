@@ -1,4 +1,8 @@
-import { UPDATE_DATA, USER_DATA } from "./../../DummyData/constants";
+import {
+  UPDATE_DATA,
+  UPDATE_DRAG_DATA,
+  USER_DATA,
+} from "./../../DummyData/constants";
 import { appointments } from "../../DummyData/resources";
 
 export const userRole = (data) => {
@@ -9,9 +13,16 @@ export const userRole = (data) => {
 };
 
 export const updateUser = (data) => {
-  console.log(data);
   return {
     type: UPDATE_DATA,
+    payload: data,
+  };
+};
+
+export const updateDrag = (data) => {
+  console.log(data);
+  return {
+    type: UPDATE_DRAG_DATA,
     payload: data,
   };
 };

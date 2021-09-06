@@ -1,4 +1,8 @@
-import { UPDATE_DATA, USER_DATA } from "./../../DummyData/constants";
+import {
+  UPDATE_DATA,
+  USER_DATA,
+  UPDATE_DRAG_DATA,
+} from "./../../DummyData/constants";
 import { appointments } from "../../DummyData/resources";
 
 // const initialData = {
@@ -40,6 +44,29 @@ const userReducer = (state = appointments, action) => {
       //   // loading: false,
       //   // role: action.payload,
       // };
+    }
+    case UPDATE_DRAG_DATA: {
+      var stateTem = state;
+      state.map((data, index) => {
+        if (
+          data.day == action.payload[1].day &&
+          data.time == action.payload[1].time &&
+          data.month == action.payload[1].month &&
+          data.year == action.payload[1].year
+        ) {
+          stateTem[index] = {
+            id: data.id,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            day: action.payload[0].day,
+            month: action.payload[0].month,
+            year: action.payload[0].year,
+            time: action.payload[0].time,
+          };
+        }
+      });
+      console.log([...stateTem]);
+      return [...stateTem];
     }
     default:
       return state;

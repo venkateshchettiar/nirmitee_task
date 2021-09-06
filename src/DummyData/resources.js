@@ -13,7 +13,7 @@ export const appointments = [
     firstName: "John",
     lastName: "Smith",
     day: "5",
-    month: "9",
+    month: "10",
     year: "2021",
     time: "9",
   },

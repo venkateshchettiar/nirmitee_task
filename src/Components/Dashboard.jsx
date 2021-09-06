@@ -240,19 +240,20 @@ const Dashboard = () => {
             <div className={classes.listing}>
               <ListItem
                 className={classes.list}
-                onClick={() => console.log("list")}
+                // onClick={() => console.log("list")}
               >
                 List
               </ListItem>
               <ListItem
                 className={classes.list}
-                onClick={() => console.log("month")}
+                // onClick={() => console.log("month")}
               >
                 Monthly
               </ListItem>
               <ListItem
                 className={classes.list}
-                onClick={() => console.log("week")}
+                style={{ color: "blue" }}
+                // onClick={() => console.log("week")}
               >
                 Weekly
               </ListItem>
