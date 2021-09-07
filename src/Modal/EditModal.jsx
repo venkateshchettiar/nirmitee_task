@@ -49,6 +49,7 @@ const EditModal = (props) => {
       },
     ];
     dispatch(updateUser(userData));
+    cogoToast.success("Appointment Updated");
     setFirstName("");
     setLastName("");
   };
@@ -111,7 +112,6 @@ const EditModal = (props) => {
   currTime = currTime.split(":");
   var hh = currTime[0];
   var min = currTime[1];
-
   if (hh < 10) {
     hh = "0" + hh;
   }
