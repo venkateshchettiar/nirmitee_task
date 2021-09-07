@@ -5,6 +5,7 @@ import { addData, updateUser } from "../Redux/Action/userAction";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import cogoToast from "cogo-toast";
+import { deleteData } from "./../Redux/Action/userAction";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -84,6 +85,42 @@ const EditModal = (props) => {
     }
   };
 
+  const handleDelete = () => {
+    const userId = data.id;
+    dispatch(deleteData(userId));
+    cogoToast.success("Appointment deleted");
+  };
+
+  var today = new Date();
+  var yyyy = today.getFullYear();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1;
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+
+  const current = new Date();
+  var currTime = current.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+  currTime = currTime.split(":");
+  var hh = currTime[0];
+  var min = currTime[1];
+
+  if (hh < 10) {
+    hh = "0" + hh;
+  }
+  if (min < 10) {
+    min = "0" + min;
+  }
+  const value = yyyy + "-" + mm + "-" + dd;
+  const newTime = hh + ":" + min;
+
   // useEffect(() => {
   //   console.log("1", firstName);
   //   console.log("2", lastName);
@@ -122,11 +159,29 @@ const EditModal = (props) => {
                 </div>
               </div>
             </div>
-            <Modal.Footer>
+            <Modal.Footer style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                onClick={() => {
+                  handleDelete();
+                  props.onHide();
+                }}
+                style={{
+                  backgroundColor: "red",
+                  outline: "none",
+                  border: "none",
+                }}
+              >
+                Delete
+              </Button>
               <Button
                 onClick={() => {
                   handleUpdate();
                   props.onHide();
+                }}
+                style={{
+                  backgroundColor: "#64bcec",
+                  outline: "none",
+                  border: "none",
                 }}
               >
                 Update
@@ -136,6 +191,11 @@ const EditModal = (props) => {
                   props.onHide();
                   setFirstName("");
                   setLastName("");
+                }}
+                style={{
+                  backgroundColor: "#afafaf",
+                  outline: "none",
+                  border: "none",
                 }}
               >
                 Close
@@ -172,7 +232,8 @@ const EditModal = (props) => {
                       id="date"
                       label="Select Date"
                       type="date"
-                      // defaultValue="2017-05-24"
+                      defaultValue={value}
+                      // value={value}
                       className={classes.textField}
                       InputLabelProps={{
                         shrink: true,
@@ -186,7 +247,7 @@ const EditModal = (props) => {
                       id="time"
                       label="Select Time"
                       type="time"
-                      // defaultValue="07:30"
+                      defaultValue={newTime}
                       className={classes.textField}
                       InputLabelProps={{
                         shrink: true,

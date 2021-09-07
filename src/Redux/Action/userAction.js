@@ -1,5 +1,6 @@
 import {
   ADD_DATA,
+  DELETE_DATA,
   UPDATE_DATA,
   UPDATE_DRAG_DATA,
   USER_DATA,
@@ -29,6 +30,12 @@ export const updateDrag = (data) => {
 export const addData = (data) => {
   return {
     type: ADD_DATA,
+    payload: data,
+  };
+};
+export const deleteData = (data) => {
+  return {
+    type: DELETE_DATA,
     payload: data,
   };
 };

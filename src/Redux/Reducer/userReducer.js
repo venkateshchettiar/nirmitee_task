@@ -3,6 +3,7 @@ import {
   USER_DATA,
   UPDATE_DRAG_DATA,
   ADD_DATA,
+  DELETE_DATA,
 } from "./../../DummyData/constants";
 import { appointments } from "../../DummyData/resources";
 
@@ -65,6 +66,10 @@ const userReducer = (state = appointments, action) => {
     }
     case ADD_DATA: {
       return [...state, action.payload[0]];
+    }
+    case DELETE_DATA: {
+      var newState = state.filter((data) => data.id !== action.payload);
+      return [...newState];
     }
     default:
       return state;
